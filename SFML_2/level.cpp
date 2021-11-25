@@ -30,12 +30,10 @@ bool level4unlock = false;
 
 
 void level::levelDesign(sf::RenderWindow& _win) {
-    conButton.setFillColor(sf::Color::Blue);
 
     sf::Vector2i playerCord = sf::Vector2i(13, 13);
     sf::Vector2i enemyCord = sf::Vector2i(4, 4);
     sf::Vector2i coinCord = sf::Vector2i(12, 3);
-
 
     sf::Texture player_texture;
 
@@ -166,112 +164,112 @@ void level::levelDesign(sf::RenderWindow& _win) {
         }
 
         //code which creates the enemyCord AI pathing
-        if (updatePath == true) {
-            int counter = 0;
+        //if (updatePath == true) {
+        //    int counter = 0;
 
-            int fullSet[2000];
-            int fullSetSize = 0;
+        //    int fullSet[2000];
+        //    int fullSetSize = 0;
 
-            int openSet[100];
-            int openSetSize = 2;
-            openSet[0] = playerCord.x + playerCord.y * 15;
-            openSet[1] = counter;
+        //    int openSet[100];
+        //    int openSetSize = 2;
+        //    openSet[0] = playerCord.x + playerCord.y * 15;
+        //    openSet[1] = counter;
 
-            int currentIndex = playerCord.x + playerCord.y * 15;
+        //    int currentIndex = playerCord.x + playerCord.y * 15;
 
-            while (currentIndex != enemyCord.x + enemyCord.y * 15) {
-                currentIndex = openSet[0];
-                counter = openSet[1] + 1;
-                int neighbors[4];
+        //    while (currentIndex != enemyCord.x + enemyCord.y * 15) {
+        //        currentIndex = openSet[0];
+        //        counter = openSet[1] + 1;
+        //        int neighbors[4];
 
-                neighbors[0] = currentIndex - 1;
-                neighbors[1] = currentIndex + 1;
-                neighbors[2] = currentIndex - 15;
-                neighbors[3] = currentIndex + 15;
+        //        neighbors[0] = currentIndex - 1;
+        //        neighbors[1] = currentIndex + 1;
+        //        neighbors[2] = currentIndex - 15;
+        //        neighbors[3] = currentIndex + 15;
 
-                for (int i = 0; i < 8; i += 2) {
-                    bool alreadyExists = false;
+        //        for (int i = 0; i < 8; i += 2) {
+        //            bool alreadyExists = false;
 
-                    for (int j = 0; j < fullSetSize; j += 2) {
-                        if (neighbors[i / 2] == fullSet[j]) {
-                            alreadyExists = true;
-                            break;
-                        }
-                    }
+        //            for (int j = 0; j < fullSetSize; j += 2) {
+        //                if (neighbors[i / 2] == fullSet[j]) {
+        //                    alreadyExists = true;
+        //                    break;
+        //                }
+        //            }
 
-                    if (alreadyExists == false) {
-                        if (gameMap[neighbors[i / 2]] != 1) {
-                            fullSet[fullSetSize] = neighbors[i / 2];
-                            fullSet[fullSetSize + 1] = counter;
-                            fullSetSize += 2;
+        //            if (alreadyExists == false) {
+        //                if (gameMap[neighbors[i / 2]] != 1) {
+        //                    fullSet[fullSetSize] = neighbors[i / 2];
+        //                    fullSet[fullSetSize + 1] = counter;
+        //                    fullSetSize += 2;
 
-                            openSet[openSetSize] = neighbors[i / 2];
-                            openSet[openSetSize + 1] = counter;
-                            openSetSize += 2;
-                        }
-                        else {
-                            fullSet[fullSetSize] = neighbors[i / 2];
-                            fullSet[fullSetSize + 1] = 100000;
-                            fullSetSize += 2;
-                        }
-                    }
-                }
+        //                    openSet[openSetSize] = neighbors[i / 2];
+        //                    openSet[openSetSize + 1] = counter;
+        //                    openSetSize += 2;
+        //                }
+        //                else {
+        //                    fullSet[fullSetSize] = neighbors[i / 2];
+        //                    fullSet[fullSetSize + 1] = 100000;
+        //                    fullSetSize += 2;
+        //                }
+        //            }
+        //        }
 
-                for (int i = 0; i < openSetSize; i++) {
-                    openSet[i] = openSet[i + 2];
-                }
+        //        for (int i = 0; i < openSetSize; i++) {
+        //            openSet[i] = openSet[i + 2];
+        //        }
 
-                openSetSize -= 2;
-            }
+        //        openSetSize -= 2;
+        //    }
 
-            for (int i = 0; i < 15 * 15; i++) {
-                orderedSet[i] = 100000;
-            }
+        //    for (int i = 0; i < 15 * 15; i++) {
+        //        orderedSet[i] = 100000;
+        //    }
 
-            for (int i = 0; i < fullSetSize; i += 2) {
-                orderedSet[fullSet[i]] = fullSet[i + 1];
-            }
+        //    for (int i = 0; i < fullSetSize; i += 2) {
+        //        orderedSet[fullSet[i]] = fullSet[i + 1];
+        //    }
 
-            orderedSet[playerCord.x + playerCord.y * 15] = 0;
+        //    orderedSet[playerCord.x + playerCord.y * 15] = 0;
 
-            int pathIndex = enemyCord.x + enemyCord.y * 15;
+        //    int pathIndex = enemyCord.x + enemyCord.y * 15;
 
-            while (pathIndex != playerCord.x + playerCord.y * 15) {
-                int neighbors[4];
+        //    while (pathIndex != playerCord.x + playerCord.y * 15) {
+        //        int neighbors[4];
 
-                neighbors[0] = pathIndex - 1;
-                neighbors[1] = pathIndex + 1;
-                neighbors[2] = pathIndex - 15;
-                neighbors[3] = pathIndex + 15;
+        //        neighbors[0] = pathIndex - 1;
+        //        neighbors[1] = pathIndex + 1;
+        //        neighbors[2] = pathIndex - 15;
+        //        neighbors[3] = pathIndex + 15;
 
-                int lowest[2]{ 0, 100000 };
-                for (int i = 0; i < 4; i++) {
-                    if (orderedSet[neighbors[i]] < lowest[1]) {
-                        lowest[0] = i;
-                        lowest[1] = orderedSet[neighbors[i]];
-                    }
-                }
+        //        int lowest[2]{ 0, 100000 };
+        //        for (int i = 0; i < 4; i++) {
+        //            if (orderedSet[neighbors[i]] < lowest[1]) {
+        //                lowest[0] = i;
+        //                lowest[1] = orderedSet[neighbors[i]];
+        //            }
+        //        }
 
-                pathIndex = neighbors[lowest[0]];
+        //        pathIndex = neighbors[lowest[0]];
 
-                path[pathSize] = pathIndex;
+        //        path[pathSize] = pathIndex;
 
-                pathSize += 1;
-            }
+        //        pathSize += 1;
+        //    }
 
-            updatePath = false;
-        }
-        //code to set the movement speed of the enemy
-        if (frameCount % moveTimer == 0) {
-            enemyCord.x = path[pathPos] % 15;
-            enemyCord.y = std::floor(path[pathPos] / 15);
-            enemy.setPosition(enemyCord.x * 40.f, enemyCord.y * 40.f);
-            pathPos += 1;
+        //    updatePath = false;
+        //}
+        ////code to set the movement speed of the enemy
+        //if (frameCount % moveTimer == 0) {
+        //    enemyCord.x = path[pathPos] % 15;
+        //    enemyCord.y = std::floor(path[pathPos] / 15);
+        //    enemy.setPosition(enemyCord.x * 40.f, enemyCord.y * 40.f);
+        //    pathPos += 1;
 
-            if (moveTimer >= 250) {
-                moveTimer = 1000 - std::floor(frameCount / 1000) * 4;
-            }
-        }
+        //    if (moveTimer >= 250) {
+        //        moveTimer = 1000 - std::floor(frameCount / 1000) * 4;
+        //    }
+        //}
 
         //code to reset/continue blue button (currently resets green player) in level 1
         switch (event.type)
@@ -314,7 +312,7 @@ void level::levelDesign(sf::RenderWindow& _win) {
 
 #pragma region draws level to window
         _win.draw(playerSprite);
-        _win.draw(enemy);
+        //_win.draw(enemy);
         _win.draw(coin);
         _win.display();
 #pragma endregion
@@ -349,6 +347,7 @@ void level::levelDesign(sf::RenderWindow& _win) {
 
                 }
             }
+            _win.clear();
 
             menu.menu(_win);
 

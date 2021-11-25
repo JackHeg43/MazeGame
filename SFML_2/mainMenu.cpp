@@ -2,6 +2,7 @@
 #include "mainMenu.h"
 #include "level.h"
 
+
 void mainMenu::menu(sf::RenderWindow& _win) {
     sf::Text gameTitle;
     sf::Text levelOneButton;

@@ -36,6 +36,7 @@ int main()
     level level;
 
     while (window.isOpen()) {
+
         menu.menu(window);
     }
 
