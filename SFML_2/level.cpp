@@ -20,20 +20,139 @@ sf::Texture player_texture;
 
 sf::RectangleShape enemy = sf::RectangleShape(sf::Vector2f(40.f, 40.f));
 sf::RectangleShape conButton = sf::RectangleShape(sf::Vector2f(40.f, 40.f));
+sf::Vector2i coinCord;
 
 mainMenu menu;
 
-bool level1unlock = true; 
-bool level2unlock = false;
-bool level3unlock = false;
-bool level4unlock = false;
 
 
-void level::levelDesign(sf::RenderWindow& _win) {
+
+
+void level::levelPicker(int value, int gameMap[], sf::RectangleShape displayRects[], sf::Vector2i coinCord) {
+    //Sets each boxes properties
+
+    int levelOne[] = {26, 27, 28, 41, 56, 61, 71, 76, 91, 95, 99, 111, 112, 113, 159, 160, 161, 168, 172, 176, 183, 184, 187, 191, 192, 193, 197, 198, 199, 200, 202};
+    int levelTwo[] = { 26, 27, 28, 41, 56, 61, 71, 76, 91, 95, 99, 111, 112, 113, 159, 160, 161, 168, 172, 176, 183, 184, 187, 191, 192, 193, 197, 198, 199, 200, 202 };
+    int levelThree[] = {16, 17, 18, 26, 27, 28, 31, 32, 42, 43, 46, 58, 61, 62, 63, 64, 65, 68, 69, 70, 71, 72, 73, 106, 109, 110, 111, 112, 113, 114, 115, 118, 151, 152, 153, 156, 157, 158, 159, 162, 163};
+    int levelFour[] = { 18, 25, 37, 40, 48, 52, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 96, 97, 98, 99, 100, 101, 102, 103, 109, 110, 121, 122, 124, 139, 141, 142, 143, 144, 145, 146, 157, 172, 181, 186, 187, 190, 191, 192, 193, 196, 197, 198, 199, 200, 201, 202};
+
+
+    for (int i = 0; i < 15; i++) {
+        for (int j = 0; j < 15; j++) {
+            displayRects[i + j * 15].setPosition(i * 40.0f, j * 40.0f);
+            displayRects[i + j * 15].setSize(sf::Vector2f(40.f, 40.f));
+            displayRects[i + j * 15].setOutlineThickness(1.f);
+            displayRects[i + j * 15].setOutlineColor(sf::Color(0, 0, 0));
+
+            //Sets box obstacles
+            if (value == 1)
+            {
+                if (!(i == playerCord.x && j == playerCord.y) && !(i == enemyCord.x && j == enemyCord.y) && !(i == coinCord.x && j == coinCord.y)) {
+                    if (i == 0 || j == 0 || i == 14 || j == 14) {
+                        gameMap[i + j * 15] = 1;
+                        displayRects[i + j * 15].setFillColor(sf::Color(60, 65, 50));
+                    }
+                    else {
+                        for (int l = 0; l < sizeof(levelOne)/sizeof(int); l++) {
+                            int o = levelOne[l];
+                            gameMap[o] = 1;
+                            displayRects[o].setFillColor(sf::Color(60, 65, 50));
+                        }
+                    }
+                }
+            }
+            if (value == 2)
+            {
+                if (!(i == playerCord.x && j == playerCord.y) && !(i == enemyCord.x && j == enemyCord.y) && !(i == coinCord.x && j == coinCord.y)) {
+                    if (i == 0 || j == 0 || i == 14 || j == 14) {
+                        gameMap[i + j * 15] = 1;
+                        displayRects[i + j * 15].setFillColor(sf::Color(60, 65, 50));
+                    }
+                }
+                else {
+                    for (int l = 0; l < sizeof(levelTwo) / sizeof(int); l++) {
+                        int o = levelTwo[l];
+                        gameMap[o] = 1;
+                        displayRects[o].setFillColor(sf::Color(60, 65, 50));
+                    }
+                }
+
+            }
+
+            if (value == 3)
+            {
+                if (!(i == playerCord.x && j == playerCord.y) && !(i == enemyCord.x && j == enemyCord.y) && !(i == coinCord.x && j == coinCord.y)) {
+                    if (i == 0 || j == 0 || i == 14 || j == 14) {
+                        gameMap[i + j * 15] = 1;
+                        displayRects[i + j * 15].setFillColor(sf::Color(60, 65, 50));
+                    }
+                    else {
+                        for (int l = 0; l < sizeof(levelThree) / sizeof(int); l++) {
+                            int o = levelThree[l];
+                            gameMap[o] = 1;
+                            displayRects[o].setFillColor(sf::Color(60, 65, 50));
+                        }
+                    }
+                }
+                
+                
+            }
+
+            if (value == 4)
+            {
+                if (!(i == playerCord.x && j == playerCord.y) && !(i == enemyCord.x && j == enemyCord.y) && !(i == coinCord.x && j == coinCord.y)) {
+                    if (i == 0 || j == 0 || i == 14 || j == 14) {
+                        gameMap[i + j * 15] = 1;
+                        displayRects[i + j * 15].setFillColor(sf::Color(60, 65, 50));
+                    }
+                }
+                else {
+                    for (int l = 0; l < sizeof(levelFour) / sizeof(int); l++) {
+                        int o = levelFour[l];
+                        gameMap[o] = 1;
+                        displayRects[o].setFillColor(sf::Color(60, 65, 50));
+                    }
+                }
+
+            }
+
+            /*else if (level1unlock == false && level2unlock == false && level3unlock == false && level4unlock == false)
+            {
+                if (!(i == playerCord.x && j == playerCord.y) && !(i == enemyCord.x && j == enemyCord.y) && !(i == coinCord.x && j == coinCord.y)) {
+                    if (std::rand() / (float)RAND_MAX < 0.20f || i == 0 || j == 0 || i == 14 || j == 14) {
+                        gameMap[i + j * 15] = 1;
+                        displayRects[i + j * 15].setFillColor(sf::Color(60, 65, 50));
+                    }
+                }
+
+            }*/
+        }
+
+    }
+}
+
+
+int level::levelDesign(sf::RenderWindow& _win, int value) {
 
     sf::Vector2i playerCord = sf::Vector2i(13, 13);
     sf::Vector2i enemyCord = sf::Vector2i(4, 4);
-    sf::Vector2i coinCord = sf::Vector2i(12, 3);
+    sf::Vector2i coinCord = sf::Vector2i(13, 4);
+
+    switch (value) {
+    case 1: 
+        coinCord = sf::Vector2i(13, 4);
+        break;
+    case 2:
+        coinCord = sf::Vector2i(13, 4);
+        break;
+    case 3:
+        coinCord = sf::Vector2i(7, 1);
+        break;
+    case 4:
+        coinCord = sf::Vector2i(1,2);
+        break;
+    }
+    
 
     sf::Texture player_texture;
 
@@ -48,81 +167,27 @@ void level::levelDesign(sf::RenderWindow& _win) {
     playerSprite.setTexture(player_texture);
     playerSprite.setPosition(playerCord.x * 40.f, playerCord.y * 40.f);
 
+
     enemy.setPosition(enemyCord.x * 40.f, enemyCord.y * 40.f);
     enemy.setFillColor(sf::Color::Red);
+    enemy.setOutlineThickness(1.f);
+    enemy.setOutlineColor(sf::Color(0, 0, 0));
 
     coin.setPosition(coinCord.x * 40.f, coinCord.y * 40.f);
     coin.setFillColor(sf::Color::Yellow);
+    coin.setOutlineThickness(1.f);
+    coin.setOutlineColor(sf::Color(0, 0, 0));
 
     //Size of map
-    int gameMap[15 * 15];
-    sf::RectangleShape displayRects[15 * 15];
+    
+    int gameMap[225];
+    sf::RectangleShape displayRects[225];
+    
 
 
-    //Sets each boxes properties
-    for (int i = 0; i < 15; i++) {
-        for (int j = 0; j < 15; j++) {
-            displayRects[i + j * 15].setPosition(i * 40.0f, j * 40.0f);
-            displayRects[i + j * 15].setSize(sf::Vector2f(40.f, 40.f));
-            displayRects[i + j * 15].setOutlineThickness(1.f);
-            displayRects[i + j * 15].setOutlineColor(sf::Color(0, 0, 0));
-
-            //Sets box obstacles
-            if (level1unlock == true)
-            {
-                if (!(i == playerCord.x && j == playerCord.y) && !(i == enemyCord.x && j == enemyCord.y) && !(i == coinCord.x && j == coinCord.y)) {
-                    if (std::rand() / (float)RAND_MAX < 0.10f || i == 0 || j == 0 || i == 14 || j == 14) {
-                        gameMap[i + j * 15] = 1;
-                        displayRects[i + j * 15].setFillColor(sf::Color(80, 30, 30));
-                    }
-                }
-            }
-            if (level2unlock == true)
-            {
-                if (!(i == playerCord.x && j == playerCord.y) && !(i == enemyCord.x && j == enemyCord.y) && !(i == coinCord.x && j == coinCord.y)) {
-                    if (std::rand() / (float)RAND_MAX < 0.15f || i == 0 || j == 0 || i == 14 || j == 14) {
-                        gameMap[i + j * 15] = 1;
-                        displayRects[i + j * 15].setFillColor(sf::Color(60, 65, 50));
-                    }
-                }
-
-            }
-
-            if (level3unlock == true)
-            {
-                if (!(i == playerCord.x && j == playerCord.y) && !(i == enemyCord.x && j == enemyCord.y) && !(i == coinCord.x && j == coinCord.y)) {
-                    if (std::rand() / (float)RAND_MAX < 0.19f || i == 0 || j == 0 || i == 14 || j == 14) {
-                        gameMap[i + j * 15] = 1;
-                        displayRects[i + j * 15].setFillColor(sf::Color(60, 65, 50));
-                    }
-                }
-
-            }
-
-            if (level4unlock == true)
-            {
-                if (!(i == playerCord.x && j == playerCord.y) && !(i == enemyCord.x && j == enemyCord.y) && !(i == coinCord.x && j == coinCord.y)) {
-                    if (std::rand() / (float)RAND_MAX < 0.21f || i == 0 || j == 0 || i == 14 || j == 14) {
-                        gameMap[i + j * 15] = 1;
-                        displayRects[i + j * 15].setFillColor(sf::Color(60, 65, 50));
-                    }
-                }
-
-            }
-
-            else if (level1unlock == false && level2unlock == false && level3unlock == false && level4unlock == false)
-            {
-                if (!(i == playerCord.x && j == playerCord.y) && !(i == enemyCord.x && j == enemyCord.y) && !(i == coinCord.x && j == coinCord.y)) {
-                    if (std::rand() / (float)RAND_MAX < 0.20f || i == 0 || j == 0 || i == 14 || j == 14) {
-                        gameMap[i + j * 15] = 1;
-                        displayRects[i + j * 15].setFillColor(sf::Color(60, 65, 50));
-                    }
-                }
-
-            }
-        }
-
-    }
+    levelPicker(value, gameMap, displayRects, coinCord);
+    
+    
 
     sf::Vector2f NormalisedVectorToMouse;
 
@@ -306,8 +371,9 @@ void level::levelDesign(sf::RenderWindow& _win) {
 
         frameCount += 1;
         _win.clear(sf::Color::White);
+         
         for (int i = 0; i < 15 * 15; i++) {
-            _win.draw(displayRects[i]);
+            _win.draw(displayRects[i]); 
         }
 
 #pragma region draws level to window
@@ -323,33 +389,12 @@ void level::levelDesign(sf::RenderWindow& _win) {
         if (playerCord == coinCord)
         {
             _win.clear();
-            playerCord = sf::Vector2i(13, 13);
-            enemyCord = sf::Vector2i(4, 4);
-            playerSprite.setPosition(playerCord.x * 40.f, playerCord.y * 40.f);
-            enemy.setPosition(enemyCord.x * 40.f, enemyCord.y * 40.f);
-            
-            pathPos = 0;
-            pathSize = 0;
+            _win.display();
+            return 1; 
             
             
-            level2unlock = true;
-            for (int i = 0; i < 15; i++) {
-                for (int j = 0; j < 15; j++) {
-                    displayRects[i + j * 15].setPosition(i * 40.0f, j * 40.0f);
-                    displayRects[i + j * 15].setSize(sf::Vector2f(40.f, 40.f));
-                    displayRects[i + j * 15].setOutlineThickness(1.f);
-                    displayRects[i + j * 15].setOutlineColor(sf::Color(0, 0, 0));
 
-                    gameMap[i + j * 15] = 0;
-                    displayRects[i + j * 15].setFillColor(sf::Color(255, 255, 255));
-
-                    _win.draw(displayRects[i]);
-
-                }
-            }
-            _win.clear();
-
-            menu.menu(_win);
+            //menu.menu(_win);
 
         }
 
@@ -361,7 +406,8 @@ void level::levelDesign(sf::RenderWindow& _win) {
             _win.clear(); 
             playerCord = sf::Vector2i(13, 13);
             playerSprite.setPosition(playerCord.x * 40.f, playerCord.y * 40.f); 
-            menu.menu(_win);
+            //menu.menu(_win);
         }
     }
+    return 0;
 }

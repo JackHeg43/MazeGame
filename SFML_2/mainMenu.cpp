@@ -2,12 +2,14 @@
 #include "mainMenu.h"
 #include "level.h"
 
+int keyPress = 1;
 
 void mainMenu::menu(sf::RenderWindow& _win) {
     sf::Text gameTitle;
     sf::Text levelOneButton;
     sf::Text levelTwoButton;
     sf::Text levelThreeButton;
+    sf::Text levelFourButton;
     sf::Text exitButton;
     
     bool isLevelOneButtonSelected;
@@ -18,6 +20,9 @@ void mainMenu::menu(sf::RenderWindow& _win) {
 
     bool isLevelThreeButtonSelected;
     bool isLevelThreeButtonPressed;
+
+    bool isLevelFourButtonSelected;
+    bool isLevelFourButtonPressed;
     
     bool isExitButtonSelected;
     bool isExitButtonPressed;
@@ -34,33 +39,40 @@ void mainMenu::menu(sf::RenderWindow& _win) {
 
     gameTitle.setFont(font);
     gameTitle.setString("Maze Game");
-    gameTitle.setPosition(300, 50);
+    gameTitle.setPosition(250, 50);
     
     levelOneButton.setFont(font);
     levelOneButton.setString("Level One");
-    levelOneButton.setPosition(300, 100);
+    levelOneButton.setPosition(50, 100);
 
     levelTwoButton.setFont(font);
     levelTwoButton.setString("Level Two");
-    levelTwoButton.setPosition(300, 200);
+    levelTwoButton.setPosition(50, 200);
 
     levelThreeButton.setFont(font);
     levelThreeButton.setString("Level Three"); 
-    levelThreeButton.setPosition(300, 300);
+    levelThreeButton.setPosition(50, 300);
+
+    levelFourButton.setFont(font);
+    levelFourButton.setString("Level Four");
+    levelFourButton.setPosition(50, 400);
     
     exitButton.setFont(font);
     exitButton.setString("Exit");
-    exitButton.setPosition(300, 400);
+    exitButton.setPosition(50, 500);
 
     isLevelOneButtonSelected = true;
     isLevelTwoButtonSelected = false;
     isLevelThreeButtonSelected = false;
+    isLevelFourButtonSelected = false;
     isExitButtonSelected = false;
 
     isLevelOneButtonPressed = false;
     isLevelTwoButtonPressed = false;
     isLevelThreeButtonPressed = false;
+    isLevelFourButtonPressed = false;
     isExitButtonPressed = false;
+
 
     while (_win.isOpen()) {
         sf::Event event;
@@ -74,32 +86,97 @@ void mainMenu::menu(sf::RenderWindow& _win) {
             {
                 switch (event.key.code)
                 {
+               
                 case sf::Keyboard::Up:
                 {
-                    if (!isLevelOneButtonSelected)
-                    {
+                    if (keyPress > 1) {
+                        keyPress--;
+                    }
+
+                    if (keyPress == 1) {
                         isLevelOneButtonSelected = true;
                         isLevelTwoButtonSelected = false;
                         isLevelThreeButtonSelected = false;
+                        isLevelFourButtonSelected = false;
                         isExitButtonSelected = false;
                     }
-                    else if (!isLevelTwoButtonSelected) {
+                    else if (keyPress == 2) {
                         isLevelOneButtonSelected = false;
                         isLevelTwoButtonSelected = true;
                         isLevelThreeButtonSelected = false;
+                        isLevelFourButtonSelected = false;
                         isExitButtonSelected = false;
                     }
-                    break;
-                }
-                case sf::Keyboard::Down:
-                {
-                    if (!isExitButtonSelected)
-                    {
+                    else if (keyPress == 3) {
+                        isLevelOneButtonSelected = false;
+                        isLevelTwoButtonSelected = false;
+                        isLevelThreeButtonSelected = true;
+                        isLevelFourButtonSelected = false;
+                        isExitButtonSelected = false;
+                    }
+                    else if (keyPress == 4) {
                         isLevelOneButtonSelected = false;
                         isLevelTwoButtonSelected = false;
                         isLevelThreeButtonSelected = false;
+                        isLevelFourButtonSelected = true;
+                        isExitButtonSelected = false;
+                    }
+                    else if (keyPress == 5) {
+                        isLevelOneButtonSelected = false;
+                        isLevelTwoButtonSelected = false;
+                        isLevelThreeButtonSelected = false;
+                        isLevelFourButtonSelected = false;
                         isExitButtonSelected = true;
                     }
+
+                    
+
+                    break;
+                }
+                
+                case sf::Keyboard::Down:
+                {
+
+                    if (keyPress < 5) {
+                        keyPress++;
+                    }
+                    if (keyPress == 1) {
+                        isLevelOneButtonSelected = true;
+                        isLevelTwoButtonSelected = false;
+                        isLevelThreeButtonSelected = false;
+                        isLevelFourButtonSelected = false;
+                        isExitButtonSelected = false;
+                    }
+                    else if (keyPress == 2) {
+                        isLevelOneButtonSelected = false;
+                        isLevelTwoButtonSelected = true;
+                        isLevelThreeButtonSelected = false;
+                        isLevelFourButtonSelected = false;
+                        isExitButtonSelected = false;
+                    }
+                    else if (keyPress == 3) {
+                        isLevelOneButtonSelected = false;
+                        isLevelTwoButtonSelected = false;
+                        isLevelThreeButtonSelected = true;
+                        isLevelFourButtonSelected = false;
+                        isExitButtonSelected = false;
+                    }
+                    else if (keyPress == 4) {
+                        isLevelOneButtonSelected = false;
+                        isLevelTwoButtonSelected = false;
+                        isLevelThreeButtonSelected = false;
+                        isLevelFourButtonSelected = true;
+                        isExitButtonSelected = false;
+                    }
+                    else if (keyPress == 5) {
+                        isLevelOneButtonSelected = false;
+                        isLevelTwoButtonSelected = false;
+                        isLevelThreeButtonSelected = false;
+                        isLevelFourButtonSelected = false;
+                        isExitButtonSelected = true;
+                    }
+
+                    
                     break;
                 }
                 case sf::Keyboard::Return:
@@ -121,6 +198,9 @@ void mainMenu::menu(sf::RenderWindow& _win) {
                     {
                         isLevelThreeButtonPressed = true;
                     }
+                    else if (isLevelFourButtonSelected) {
+                        isLevelFourButtonPressed = true;
+                    }
                     else
                     {
                         isExitButtonPressed = true;
@@ -130,6 +210,11 @@ void mainMenu::menu(sf::RenderWindow& _win) {
                 }
                 default:
                 {
+                    isLevelOneButtonSelected = true;
+                    isLevelTwoButtonSelected = false;
+                    isLevelThreeButtonSelected = false;
+                    isLevelFourButtonSelected = false;
+                    isExitButtonSelected = false;
                     break;
                 }
                 }
@@ -139,6 +224,7 @@ void mainMenu::menu(sf::RenderWindow& _win) {
                     levelOneButton.setFillColor(sf::Color::Black);
                     levelTwoButton.setFillColor(sf::Color::White);
                     levelThreeButton.setFillColor(sf::Color::White);
+                    levelFourButton.setFillColor(sf::Color::White);
                     exitButton.setFillColor(sf::Color::White);
                 }
                 else if (isLevelTwoButtonSelected)
@@ -146,36 +232,50 @@ void mainMenu::menu(sf::RenderWindow& _win) {
                     levelOneButton.setFillColor(sf::Color::White);
                     levelTwoButton.setFillColor(sf::Color::Black);
                     levelThreeButton.setFillColor(sf::Color::White);
+                    levelFourButton.setFillColor(sf::Color::White);
                     exitButton.setFillColor(sf::Color::White);
                 }
                 else if (isLevelThreeButtonSelected) {
                     levelOneButton.setFillColor(sf::Color::White);
                     levelTwoButton.setFillColor(sf::Color::White);
                     levelThreeButton.setFillColor(sf::Color::Black);
+                    levelFourButton.setFillColor(sf::Color::White);
+                    exitButton.setFillColor(sf::Color::White);
+                }
+                else if (isLevelFourButtonSelected) {
+                    levelOneButton.setFillColor(sf::Color::White);
+                    levelTwoButton.setFillColor(sf::Color::White);
+                    levelThreeButton.setFillColor(sf::Color::White);
+                    levelFourButton.setFillColor(sf::Color::Black);
                     exitButton.setFillColor(sf::Color::White);
                 }
                 else {
                     levelOneButton.setFillColor(sf::Color::White);
                     levelTwoButton.setFillColor(sf::Color::White);
                     levelThreeButton.setFillColor(sf::Color::White);
+                    levelFourButton.setFillColor(sf::Color::White);
                     exitButton.setFillColor(sf::Color::Black);
                 }
 
                 if (isLevelOneButtonPressed)
                 {
-                    isLevelOneButtonPressed = true;
-                    level.levelDesign(_win);
+                    isLevelOneButtonPressed = false;
+                    level.levelDesign(_win, 1);
 
                 } else if (isLevelTwoButtonPressed)
                 {
-                    isLevelTwoButtonPressed = true;
-                    level.levelDesign(_win);
+                    isLevelTwoButtonPressed = false;
+                    level.levelDesign(_win, 2);
 
                 } else if (isLevelThreeButtonPressed)
                 {
-                    isLevelThreeButtonPressed = true;
-                    level.levelDesign(_win);
+                    isLevelThreeButtonPressed = false;
+                    level.levelDesign(_win, 3);
 
+                } 
+                else if (isLevelFourButtonPressed) {
+                    isLevelFourButtonPressed = false;
+                    level.levelDesign(_win, 4);
                 }
                 else if (isExitButtonPressed)
                 {
@@ -188,6 +288,7 @@ void mainMenu::menu(sf::RenderWindow& _win) {
             _win.draw(levelOneButton);
             _win.draw(levelTwoButton);
             _win.draw(levelThreeButton);
+            _win.draw(levelFourButton);
             _win.draw(exitButton);
             _win.display();
         }

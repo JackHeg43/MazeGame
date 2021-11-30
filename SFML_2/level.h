@@ -6,5 +6,6 @@ private:
 
 
 public:
-	void levelDesign(sf::RenderWindow& _win); 
+	void levelPicker(int value, int gameMap[], sf::RectangleShape displayRects[], sf::Vector2i CoinCord);
+	int levelDesign(sf::RenderWindow& _win, int value); 
 };
