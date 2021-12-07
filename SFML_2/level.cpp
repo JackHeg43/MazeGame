@@ -14,9 +14,9 @@ void level::levelPicker(int value, int gameMap[], sf::RectangleShape displayRect
 
     //Positions for coins for each level
     int coinlevel1[] = { 66, 73, 174 };
-    int coinlevel2[] = {17, 37, 58, 66, 174};
+    int coinlevel2[] = {17, 58, 66, 152, 174};
     int coinlevel3[] = { 22, 76, 88, 136, 148 ,188};
-    int coinlevel4[] = {32};
+    int coinlevel4[] = {26, 32, 51, 95 , 162, 169};
 
     //Sets each boxes properties
     for (int i = 0; i < 15; i++) {
@@ -406,7 +406,7 @@ int level::levelDesign(sf::RenderWindow& _win, int value) {
             }
             break;
         case 4:
-            if (score == 1) {
+            if (score == 6) {
                 score = 0;
                 return 4;
             }
