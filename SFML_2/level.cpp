@@ -157,15 +157,6 @@ int level::levelDesign(sf::RenderWindow& _win, int value) {
     playerSprite.setTexture(player_texture);
     playerSprite.setPosition(playerCord.x * 40.f, playerCord.y * 40.f);
 
-    //Retrieves a file to set the text as font arial
-    sf::Font font;
-
-    //Error Handling 
-    if (!font.loadFromFile("arial.ttf")) {
-
-    }
-
-
     //Sets sound for levels 
     sf::SoundBuffer buffer2;
     if (!buffer2.loadFromFile("levelmusic.wav")) {

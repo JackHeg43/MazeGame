@@ -18,7 +18,7 @@ private:
 	int starFinal3 = 0;
 	int starFinal4 = 0;
 
-	//Retrieves a file to set the text as font arial
+	//Retrieves a file to set the text
 	sf::Font font;
 
 	//Text and sprites for Main Menu
